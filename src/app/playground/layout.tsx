@@ -17,7 +17,7 @@ const Layout = ({
         <aside className="hidden lg:block">
           {progress}
         </aside>
-        <article className="border col-span-3 xl:col-span-2">
+        <article className="col-span-3 xl:col-span-2 bg-base-300 rounded-2xl p-5">
           {children}
         </article>
         <aside className="border hidden xl:block">

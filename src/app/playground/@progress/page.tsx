@@ -29,18 +29,13 @@ const Progress = () => {
     ]
     return (
         <section>
-            <ul className="menu bg-base-200 rounded-box min-w-65 w-full gap-5">
+            <ul className="menu bg-base-100 rounded-box min-w-65 w-full gap-3">
                 {data?.map(item => (
                     <li key={item.id}>
                         <a href="">
-
-                            <button className="btn btn-accent">
-                                <div className="radial-progress" style={{ "--value": "0", "--size": "1.5rem" } as React.CSSProperties}
-                                    aria-valuenow={0} role="progressbar">
-                                    {item.id}
-                                </div>
-                            </button>
-
+                            <div className="btn btn-accent px-0.5">
+                                <button className="btn btn-sm btn-success">{item.id}</button>
+                            </div>
                             <span className="text-lg">{item.title}</span>
                         </a>
                     </li>
@@ -48,10 +43,10 @@ const Progress = () => {
                 <li>
                     <div>
                         <div className="dropdown dropdown-right dropdown-center">
-                            <button tabIndex={0} role="button" className="btn btn-square btn-accent w-15">
+                            <button tabIndex={0} role="button" className="btn btn-square btn-accent">
                                 <IoMdAdd />
                             </button>
-                            <ul tabIndex={-1} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                            <ul tabIndex={-1} className="dropdown-content menu bg-base-100 rounded-box w-48 z-1 p-2 shadow-sm">
                                 <li><a>Item 1</a></li>
                                 <li><a>Item 2</a></li>
                             </ul>
@@ -60,7 +55,7 @@ const Progress = () => {
                     </div>
                 </li>
             </ul>
-        </section>
+        </section >
     )
 }
 
