@@ -1,0 +1,48 @@
+import { Button } from "@/components/ui/button"
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
+import { menudata } from "@/data/resume"
+import { Fragment } from "react/jsx-runtime"
+import { FaCheck } from "react-icons/fa6";
+import { IoMdAdd } from "react-icons/io";
+
+const Page = () => {
+    return (
+        <Fragment>
+            <SidebarMenu className="space-y-1 w-full">
+                {menudata?.map((items) => (
+                    <SidebarMenuItem key={items.id} className="cursor-pointer w-full">
+                        <SidebarMenuButton asChild className="text-lg px-0! py-7 w-full group hover:bg-hwbtheme/30">
+                            <div>
+                                <Button variant="default" size="icon-lg" className="flex justify-center items-center rounded-lg bg-hwbtheme/30 group-hover:bg-hwbtheme">
+                                    {items.completed ? (
+                                        // <Button variant="default" size="icon-sm" className="bg-wbtheme rounded-lg">{items.id}</Button>
+                                        <Button variant="ghost" size="icon-lg" className="text-wbtheme">
+                                            <FaCheck />
+                                        </Button>
+                                    ) : (
+                                        <Button variant="ghost" size="icon-sm" className="text-wbtheme group-hover:text-white">{items.id}</Button>
+                                    )}
+                                </Button>
+                                <span>{items.title}</span>
+                            </div>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                ))}
+                <SidebarMenuItem className="cursor-pointer w-full">
+                    <SidebarMenuButton asChild className="text-lg px-0! py-7 w-full hover:bg-hwbtheme/30">
+                        <div>
+                            <Button variant="default" size="icon-lg" className="flex justify-center items-center rounded-lg bg-hwbtheme/30">
+                                <IoMdAdd className="text-wbtheme" />
+                                
+                            </Button>
+                            <span>Add Sections</span>
+                        </div>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+
+            </SidebarMenu>
+        </Fragment>
+    )
+}
+
+export default Page

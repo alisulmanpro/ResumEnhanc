@@ -6,4 +6,8 @@ declare global {
         children: React.ReactNode
     }
 
+    interface PlaygroundLayoutProps extends RootLayoutProps {
+        menu: React.ReactNode
+    }
+
 }
