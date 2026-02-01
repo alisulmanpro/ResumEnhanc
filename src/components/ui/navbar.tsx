@@ -1,63 +1,99 @@
+"use client"
+
 import { FaArrowLeft } from "react-icons/fa6";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { SlOptionsVertical } from "react-icons/sl";
 import { LuUndo2 } from "react-icons/lu";
 import { LuRedo2 } from "react-icons/lu";
-import { IoCloudDoneOutline } from "react-icons/io5";
-import { TfiReload } from "react-icons/tfi";
 import { MdLabelOutline } from "react-icons/md";
 import { IoShareSocialOutline } from "react-icons/io5";
+import { Button } from "@/components/ui/button"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { ButtonGroup } from "./button-group";
+import ResumeTitle from "./CustomFileButton";
+import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 
 const Navbar = () => {
     return (
-        <nav className="navbar bg-base-100 shadow-sm justify-between lg:p-7">
-            <button className="btn btn-sm">
+        <nav className="border-black flex justify-between items-center p-7">
+            <Button variant="outline" >
                 <FaArrowLeft />
-                <span className="hidden md:block">MyResume</span>
-            </button>
-            <p className="flex items-center gap-5">
-                <span>Untitled</span>
-                <IoCloudDoneOutline className="text-2xl" />
-                <TfiReload className="text-xl hidden" />
-            </p>
+                <span className="hidden sm:inline-block">Resume</span>
+            </Button>
+
+            <ResumeTitle
+                initialTitle="Untitled"
+                onSave={(newTitle) => {
+                    console.log("Saved title:", newTitle);
+                }}
+                isSaving={false}
+            />
+
             <div className="flex items-center gap-2 lg:gap-5">
-                <div>
-                    <button className="btn btn-sm rounded-r-none">
+
+                <ButtonGroup
+                    orientation="horizontal"
+                    aria-label="Media controls"
+                    className="h-fit hidden sm:inline-block"
+                >
+                    <Button variant="outline" size="icon">
                         <LuUndo2 />
-                    </button>
-                    <button className="btn btn-sm rounded-l-none">
+                    </Button>
+                    <Button variant="outline" size="icon">
                         <LuRedo2 />
-                    </button>
-                </div>
-                <div className="dropdown dropdown-end">
-                    <button tabIndex={0} role="button" className="btn btn-sm">
-                        <SlOptionsVertical />
-                    </button>
-                    <ul tabIndex={-1} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                        <li>
-                            <a>
+                    </Button>
+                </ButtonGroup>
+
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline"><SlOptionsVertical /></Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="mr-7 mt-3">
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem>
                                 <MdLabelOutline />
-                                <span>Rename</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a>
+                                Rename
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
                                 <IoShareSocialOutline />
-                                <span>Share</span>
-                            </a>
-                        </li>
-                        <li>
-                            <button className="btn btn-sm btn-success items-center text-white w-full sm:hidden">
+                                Share
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuGroup className="inline-block sm:hidden">
+                            <DropdownMenuSeparator className="bg-secondary h-0.5 my-3" />
+                            <ButtonGroup
+                                orientation="horizontal"
+                                aria-label="Media controls"
+                                className="h-fit"
+                            >
+                                <Button variant="outline" >
+                                    <LuUndo2 />
+                                    Undo
+                                </Button>
+                                <Button variant="outline">
+                                    <LuRedo2 />
+                                    Redo
+                                </Button>
+                            </ButtonGroup>
+                            <Button variant="outline" className="flex items-center w-full">
                                 <MdOutlineFileDownload className="text-xl" />
                                 <span className="mt-1">Download</span>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-                <button className="hidden btn btn-sm btn-success items-center text-white sm:flex">
+                            </Button>
+                        </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
+                <Button variant="outline" className="hidden sm:flex items-center">
                     <MdOutlineFileDownload className="text-xl" />
                     <span className="mt-1 hidden md:block">Download</span>
-                </button>
+                </Button>
+
             </div>
         </nav >
     )
