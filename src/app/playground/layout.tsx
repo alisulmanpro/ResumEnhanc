@@ -1,4 +1,4 @@
-import Navbar from "@/components/ui/Navbar"
+import Navbar from "@/components/ui/navbar"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { Fragment } from "react/jsx-runtime"
 

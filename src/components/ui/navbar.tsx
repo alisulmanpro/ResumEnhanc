@@ -16,7 +16,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ButtonGroup } from "./button-group";
-import ResumeTitle from "./CustomFileButton";
+import ResumeTitle from "./custom-file-button";
 import { DropdownMenuSeparator } from "@radix-ui/react-dropdown-menu";
 
 const Navbar = () => {
