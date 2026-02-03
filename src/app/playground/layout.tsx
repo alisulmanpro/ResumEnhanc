@@ -8,15 +8,22 @@ const Layout = ({
 }: Readonly<PlaygroundLayoutProps>) => {
     return (
         <Fragment>
-            <header>
+            <header className="h-1.5/12 shrink-0">
                 <Navbar />
             </header>
-            <main className="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-4 border border-black p-7 gap-7">
+
+            <main className="flex justify-center items-start px-7 gap-5">
                 <SidebarProvider>
-                    <aside className="hidden h-full w-full col-span-2 lg:col-span-1 md:block">{menu}</aside>
+                    <aside className="w-2/3">
+                        {menu}
+                    </aside>
                 </SidebarProvider>
-                <article className="border border-black h-full md:col-span-3 lg:col-span-2">{children}</article>
-                <aside className="hidden border border-black h-full lg:block"></aside>
+
+                <article className="w-full border border-black">
+                    {children}
+                </article>
+
+                <aside className="border border-black w-full"></aside>
             </main>
         </Fragment>
     )

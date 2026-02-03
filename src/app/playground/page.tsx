@@ -1,11 +1,14 @@
-import { menudata } from "@/data/resume"
+"use client"
+import useResumeStore from "@/lib/store/resume.store"
 import { Fragment } from "react/jsx-runtime"
 
 const Page = () => {
+    const {items} = useResumeStore()
+
     return(
         <Fragment>
-            {menudata?.map(items => (
-                <h1 key={items.id}>{items.title}</h1>
+            {items?.map(item => (
+                <h1 key={item.id}>{item.title}</h1>
             ))}
         </Fragment>
     )

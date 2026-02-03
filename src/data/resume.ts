@@ -14,18 +14,14 @@ import {
     FiZap,
 } from "react-icons/fi";
 
-import { TiHome } from "react-icons/ti";
-import { MdPermContactCalendar } from "react-icons/md";
-import { MdBusinessCenter } from "react-icons/md";
-import { FaGraduationCap } from "react-icons/fa6";
-
-export const menudata: MenuData[] = [
+const menuData: MenuData[] = [
     {
         id: 1,
         title: "Personal Information",
-        icon: TiHome,
+        icon: "TiHome",
         description: "Define your professional persona and craft a compelling headline that captures recruiter attention in seconds.",
         completed: false,
+        addsec: false,
         fields: [
             {
                 id: 1,
@@ -59,9 +55,10 @@ export const menudata: MenuData[] = [
     {
         id: 2,
         title: "Contact Info",
-        icon: MdPermContactCalendar,
+        icon: "MdPermContactCalendar",
         description: "Provide verified contact channels and professional links to ensure seamless communication during the hiring process.",
         completed: false,
+        addsec: false,
         fields: [
             {
                 id: 1,
@@ -136,9 +133,10 @@ export const menudata: MenuData[] = [
     {
         id: 3,
         title: "Work Experience",
-        icon: MdBusinessCenter,
+        icon: "MdBusinessCenter",
         description: "Detail your professional journey using impact-driven bullet points that showcase measurable results and career growth.",
         completed: false,
+        addsec: false,
         addmore: [
             {
                 title: "Job Title",
@@ -204,9 +202,10 @@ export const menudata: MenuData[] = [
     {
         id: 4,
         title: "Education",
-        icon: FaGraduationCap,
+        icon: "FaGraduationCap",
         description: "Document your academic background, certifications, and relevant coursework that form the foundation of your expertise.",
         completed: false,
+        addsec: false,
         addmore: [
             {
                 title: "Degree",
@@ -269,5 +268,191 @@ export const menudata: MenuData[] = [
                 ],
             }
         ]
-    }
+    },
+    {
+        id: 5,
+        title: "Skills",
+        icon: "FaCogs",
+        description: "List your technical proficiencies and soft skills, prioritizing those most relevant to your target job descriptions.",
+        completed: false,
+        addsec: true,
+        addmore: [
+            {
+                title: "Skill Group",
+                fields: [
+                    {
+                        id: 1,
+                        title: "Skill Name",
+                        slug: "skill_name",
+                        type: "text",
+                        mandatory: true,
+                        placeholder: "e.g., React, TypeScript, Project Management",
+                        prefixIcon: FiZap,
+                    },
+                    {
+                        id: 2,
+                        title: "Level",
+                        slug: "skill_level",
+                        type: "text", // Could be a select: Beginner, Intermediate, Expert
+                        mandatory: false,
+                        placeholder: "Expert / 5 years",
+                        prefixIcon: FiAward,
+                    },
+                ],
+            }
+        ]
+    },
+    {
+        id: 6,
+        title: "Projects",
+        icon: "BsKanbanFill",
+        description: "Showcase your best work, including open-source contributions or personal side projects that demonstrate your practical abilities.",
+        completed: false,
+        addsec: true,
+        addmore: [
+            {
+                title: "Project",
+                fields: [
+                    {
+                        id: 1,
+                        title: "Project Name",
+                        slug: "project_name",
+                        type: "text",
+                        mandatory: true,
+                        placeholder: "E-commerce Platform",
+                        prefixIcon: FiType,
+                    },
+                    {
+                        id: 2,
+                        title: "Project Link",
+                        slug: "project_url",
+                        type: "url",
+                        mandatory: false,
+                        placeholder: "https://github.com/yourusername/project",
+                        prefixIcon: FiGlobe,
+                    },
+                    {
+                        id: 3,
+                        title: "Description",
+                        slug: "project_description",
+                        type: "textarea",
+                        mandatory: true,
+                        placeholder: "Describe technologies used and your specific contributions...",
+                        prefixIcon: FiEdit3,
+                    },
+                ],
+            }
+        ]
+    },
+    {
+        id: 7,
+        title: "Certifications",
+        icon: "MdVerified",
+        description: "Highlight professional certifications and licenses that validate your expertise and commitment to continuous learning.",
+        completed: false,
+        addsec: true,
+        addmore: [
+            {
+                title: "Certification",
+                fields: [
+                    {
+                        id: 1,
+                        title: "Certificate Name",
+                        slug: "cert_name",
+                        type: "text",
+                        mandatory: true,
+                        placeholder: "AWS Certified Solutions Architect",
+                        prefixIcon: FiAward,
+                    },
+                    {
+                        id: 2,
+                        title: "Issuing Organization",
+                        slug: "cert_issuer",
+                        type: "text",
+                        mandatory: true,
+                        placeholder: "Amazon Web Services",
+                        prefixIcon: FiBriefcase,
+                    },
+                    {
+                        id: 3,
+                        title: "Issue Date",
+                        slug: "cert_date",
+                        type: "text",
+                        mandatory: false,
+                        placeholder: "March 2024",
+                        prefixIcon: FiCalendar,
+                    },
+                ],
+            }
+        ]
+    },
+    {
+        id: 8,
+        title: "Languages",
+        icon: "LuLanguages",
+        description: "List the languages you speak and your proficiency levels to appeal to international and multicultural organizations.",
+        completed: false,
+        addsec: true,
+        addmore: [
+            {
+                title: "Language",
+                fields: [
+                    {
+                        id: 1,
+                        title: "Language",
+                        slug: "language_name",
+                        type: "text",
+                        mandatory: true,
+                        placeholder: "English, Urdu, German",
+                        prefixIcon: FiType,
+                    },
+                    {
+                        id: 2,
+                        title: "Proficiency",
+                        slug: "language_level",
+                        type: "text",
+                        mandatory: true,
+                        placeholder: "Native / Professional / Fluent",
+                        prefixIcon: FiZap,
+                    },
+                ],
+            }
+        ]
+    },
+    {
+        id: 9,
+        title: "Custom Section",
+        icon: "MdBuild",
+        description: "Add a personalized section for awards, volunteering, publications, or any other unique achievements.",
+        completed: false,
+        addsec: true,
+        addmore: [
+            {
+                title: "Entry",
+                fields: [
+                    {
+                        id: 1,
+                        title: "Title",
+                        slug: "custom_title",
+                        type: "text",
+                        mandatory: true,
+                        placeholder: "Volunteer Experience / Publication Title",
+                        prefixIcon: FiType,
+                    },
+                    {
+                        id: 2,
+                        title: "Description",
+                        slug: "custom_description",
+                        type: "textarea",
+                        mandatory: false,
+                        placeholder: "Provide more details here...",
+                        prefixIcon: FiEdit3,
+                    },
+                ],
+            }
+        ]
+    },
+
 ];
+
+export default menuData;
