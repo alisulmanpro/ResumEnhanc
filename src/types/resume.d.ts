@@ -24,7 +24,8 @@ declare global {
     interface MenuData {
         id: number;
         title: string;
-        slug: string;
+        icon?: React.ElementType;
+        slug?: string;
         description: string;
         completed: boolean;
         addmore?: AddMore[];

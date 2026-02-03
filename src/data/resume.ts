@@ -14,11 +14,16 @@ import {
     FiZap,
 } from "react-icons/fi";
 
+import { TiHome } from "react-icons/ti";
+import { MdPermContactCalendar } from "react-icons/md";
+import { MdBusinessCenter } from "react-icons/md";
+import { FaGraduationCap } from "react-icons/fa6";
+
 export const menudata: MenuData[] = [
     {
         id: 1,
         title: "Personal Information",
-        slug: "personal-information",
+        icon: TiHome,
         description: "Define your professional persona and craft a compelling headline that captures recruiter attention in seconds.",
         completed: false,
         fields: [
@@ -54,7 +59,7 @@ export const menudata: MenuData[] = [
     {
         id: 2,
         title: "Contact Info",
-        slug: "contact-info",
+        icon: MdPermContactCalendar,
         description: "Provide verified contact channels and professional links to ensure seamless communication during the hiring process.",
         completed: false,
         fields: [
@@ -131,7 +136,7 @@ export const menudata: MenuData[] = [
     {
         id: 3,
         title: "Work Experience",
-        slug: "work-experience",
+        icon: MdBusinessCenter,
         description: "Detail your professional journey using impact-driven bullet points that showcase measurable results and career growth.",
         completed: false,
         addmore: [
@@ -199,7 +204,7 @@ export const menudata: MenuData[] = [
     {
         id: 4,
         title: "Education",
-        slug: "education",
+        icon: FaGraduationCap,
         description: "Document your academic background, certifications, and relevant coursework that form the foundation of your expertise.",
         completed: false,
         addmore: [
