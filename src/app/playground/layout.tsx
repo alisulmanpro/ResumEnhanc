@@ -1,32 +1,27 @@
-import Navbar from "@/components/ui/navbar"
-import { SidebarProvider } from "@/components/ui/sidebar"
+import Navbar from "@/components/navbar"
 import { Fragment } from "react/jsx-runtime"
 
-const Layout = ({
-    children,
-    menu
-}: Readonly<PlaygroundLayoutProps>) => {
+
+const Layout = (
+    {
+        children,
+        sidebar
+    }: Readonly<PlaygroundLayoutProps>
+) => {
     return (
         <Fragment>
-            <header className="h-1.5/12 shrink-0">
+            <header>
                 <Navbar />
             </header>
-
-            <main className="flex justify-center items-start px-7 gap-5">
-                <SidebarProvider>
-                    <aside className="w-2/3">
-                        {menu}
-                    </aside>
-                </SidebarProvider>
-
-                <article className="w-full border border-black">
-                    {children}
-                </article>
-
-                <aside className="border border-black w-full"></aside>
+            <main className="grid grid-cols-8 gap-7 px-7">
+                <aside className="col-span-2">
+                    {sidebar}
+                </aside>
+                <article className="bg-base-200 rounded-3xl col-span-4 p-10 select-none">{children}</article>
+                <aside className="col-span-2">{sidebar}</aside>
             </main>
         </Fragment>
     )
 }
 
-export default Layout
+export default Layout;

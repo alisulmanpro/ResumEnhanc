@@ -1,10 +1,8 @@
-export {}
+export { }
 
-declare global{
-
-    interface AddSectionsProps {
-        open: boolean;
-        setOpenChange: (open: boolean) => void;
+declare global {
+    interface PlaygroundLayoutProps {
+        children: React.ReactNode;
+        sidebar: React.ReactNode
     }
-
 }

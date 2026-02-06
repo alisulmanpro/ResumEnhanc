@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const open_sans = Open_Sans({
-  variable: "--font-open-sans",
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
@@ -18,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="corporate">
       <body
-        className={`${open_sans.className} antialiased`}
+        className={`${spaceGrotesk.className} antialiased`}
       >
         {children}
       </body>
