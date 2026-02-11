@@ -51,7 +51,9 @@ export const ResumeSectionFields = (): Field[] => {
             type: field.type,
             required: field.required,
         }))
-        data.push(...sectionData as Field[])
+        if (sectionData) {
+            data.push(...sectionData)
+        }
     })
 
     return data

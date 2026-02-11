@@ -6,7 +6,7 @@ import { BiSolidBookAdd } from "react-icons/bi";
 import { IoAddSharp } from "react-icons/io5";
 import { MdClose } from "react-icons/md";
 import clsx from "clsx"
-import { useEffect } from "react";
+import { FaCheck } from "react-icons/fa6";
 
 const Modal = () => {
     return (
@@ -33,7 +33,7 @@ const Modal = () => {
 
 const Page = () => {
 
-    const { sections, activeId, hydrated, setActiveId, setHydrated } = useSectionsStore()
+    const { sections, activeId, hydrated, completedSectionIds, setActiveId, setCompletedId } = useSectionsStore()
 
     const modelToggle = () => {
         const model = document.getElementById("model_toggle") as HTMLDialogElement
@@ -48,10 +48,6 @@ const Page = () => {
         setActiveId(id)
     }
 
-    useEffect(() => {
-        setHydrated(!hydrated)
-    }, [hydrated, setHydrated])
-
     if (!hydrated) {
         return (
             <div className="skeleton h-55 w-full"></div>
@@ -62,24 +58,36 @@ const Page = () => {
         <ul className="menu menu-lg bg-base-100 rounded-box p-0 w-full gap-1 [&>*>*]:flex [&>*>*]:gap-5">
             {sections?.map(section => {
                 const Icon = ResumeIcon[section.section_icon as ResumeIconKey]
+
+                const isCompleted = completedSectionIds.includes(section.id)
+                const isClickable = isCompleted || activeId === section.id
+
                 return (
                     <li
                         key={section.id}
-                        className={
-                            clsx("rounded-lg hover:rounded-lg!",
-                                {
-                                    "menu-active ": activeId === section.id
-                                }
-                            )}
-                        onClick={() => handleActiveClick(section.id)}
+                        className={clsx(
+                            "rounded-lg hover:rounded-lg!",
+                            {
+                                "menu-active": activeId === section.id,
+                                "menu-disabled": !isClickable,
+                            }
+                        )}
+                        onClick={() => {
+                            if (!isClickable) return
+                            handleActiveClick(section.id)
+                        }}
                     >
-                        <span>
-                            {Icon && <Icon className="text-xl" />}
-                            {section.section_title}
+                        <span className="flex justify-between items-center">
+                            <span className="flex gap-5 items-center">
+                                {Icon && <Icon className="text-xl" />}
+                                {section.section_title}
+                            </span>
+                            {isCompleted && <FaCheck />}
                         </span>
                     </li>
                 )
             })}
+
             <li onClick={() => modelToggle()}>
                 <Modal />
                 <span>

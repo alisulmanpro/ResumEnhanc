@@ -3,7 +3,6 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { ResumeData, ResumeSectionBuilder, ResumeSectionFields } from '../data/resume.selector';
-import cookieStorage from '../cookie_storage';
 
 export const useSectionsStore = create<ResumeVisibleStoreProps>()(
     persist(
@@ -11,6 +10,7 @@ export const useSectionsStore = create<ResumeVisibleStoreProps>()(
             sections: ResumeSectionBuilder(),
             sectionData: ResumeData(),
             resumeSectionFields: ResumeSectionFields(),
+            completedSectionIds: [],
             activeId: ResumeData()[0].id,
             hydrated: false,
 
@@ -18,26 +18,33 @@ export const useSectionsStore = create<ResumeVisibleStoreProps>()(
                 set(() => ({
                     activeId: id,
                 })),
-                
+
             setHydrated: (hydrated: boolean) =>
                 set(() => ({
                     hydrated,
                 })),
+                
+            setCompletedId: (id: string) => set((state) => ({
+                completedSectionIds: [
+                    ...state.completedSectionIds,
+                    id
+                ]
+            }))
         }),
         {
             name: 'resume-sections',
-            storage: createJSONStorage(() => cookieStorage),
+            storage: createJSONStorage(() => localStorage),
             partialize: (state) => (
                 {
                     sections: state.sections,
                     sectionData: state.sectionData,
                     resumeSectionFields: state.resumeSectionFields,
                     activeId: state.activeId,
-                    hydrated: state.hydrated,
+                    completedSectionIds: state.completedSectionIds,
                 }
             ),
-            onRehydrateStorage: () => () => {
-                useSectionsStore.setState({ hydrated: true })
+            onRehydrateStorage: () => (state) => {
+                state?.setHydrated(true)
             },
         }
     )

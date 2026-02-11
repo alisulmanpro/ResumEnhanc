@@ -10,7 +10,7 @@ declare global {
         | "url"
         | "tags"
 
-    type ResumeIconKey = 
+    type ResumeIconKey =
         | "FaUserGraduate"
         | "MdPermContactCalendar"
         | "MdBusinessCenter"
@@ -54,11 +54,28 @@ declare global {
         sections: ResumeVisibleSectionMeta[]
         sectionData: ResumeSectionMeta[]
         resumeSectionFields: ResumeSectionFields[]
+        completedSectionIds: string[]
         activeId: string
         hydrated: boolean
+        setCompletedId: (id: string) => void
         setActiveId: (id: string) => void
         setHydrated: (hydrated: boolean) => void
     }
 
+    interface ResumeInfo {
+        id: string
+        resume_title: string
+        resume_data: Record<string, any>
+    }
 
+    interface ResumeInfoProps {
+        resumeInfo: ResumeInfo[] | []
+        activeResumeId: string | null
+        resume_title: string | "untitled"
+        createResume: (title: string) => void
+        updateResumeTitle: (id: string, title: string) => void
+        setResumeName: (name: string) => void
+        setActiveResume: (id: string) => void
+        upsertSection: (resumeId: string, sectionKey: string, data: any) => void
+    }
 }
