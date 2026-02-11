@@ -72,7 +72,7 @@ declare global {
         resumeInfo: ResumeInfo[] | []
         activeResumeId: string | null
         resume_title: string | "untitled"
-        createResume: (title: string) => void
+        createResume: (title: string) => string
         updateResumeTitle: (id: string, title: string) => void
         setResumeName: (name: string) => void
         setActiveResume: (id: string) => void

@@ -1,6 +1,7 @@
 "use client"
 
 import ResumeIcon from "@/lib/icons/resume.icons"
+import useResumeStore from "@/lib/store/resume_info.store"
 import { useSectionsStore } from "@/lib/store/resume_visible.store"
 import { FC, useEffect, useState } from "react"
 import { Fragment } from "react/jsx-runtime"
@@ -21,7 +22,8 @@ const Input: FC<InputProps> = ({ field, value, onChange }) => {
 }
 
 const Page = () => {
-    const { resumeSectionFields, sectionData, activeId, hydrated } = useSectionsStore()
+    const { resumeSectionFields, sectionData, activeId, hydrated, setCompletedId, setActiveId } = useSectionsStore()
+    const { activeResumeId, resume_title, createResume, upsertSection } = useResumeStore()
     const [fields, setFields] = useState<Record<string, any>>({})
 
 
@@ -54,16 +56,32 @@ const Page = () => {
         resumeSectionFields
             .filter(
                 (field) =>
-                    field.sectionId === activeId && field.required === true
-            )
+                    field.sectionId === activeId &&
+                    field.required === true)
             .every(
                 (field) =>
                     fields[field.name] !== undefined &&
                     String(fields[field.name]).trim() !== ""
             )
 
-    const handleNextClick = () => {
-        console.log(fields)
+    const handleNextClick = (id: string, index: number) => {
+        setCompletedId(id)
+
+        let currentResumeId = activeResumeId;
+
+        if (index === 0 && !currentResumeId) {
+            currentResumeId = createResume(resume_title);
+        }
+
+        const currentSectionTitle = sectionData[index].title
+
+        if (currentResumeId) {
+            upsertSection(currentResumeId, currentSectionTitle, fields);
+        }
+
+        if (index < sectionData.length - 1) {
+            setActiveId(sectionData[index + 1].id)
+        }
     }
 
     if (!hydrated) {
@@ -91,7 +109,7 @@ const Page = () => {
 
     return (
         <Fragment>
-            {sectionData && sectionData.map((data) => {
+            {sectionData && sectionData.map((data, index) => {
                 const Icon = ResumeIcon[data.icon as ResumeIconKey]
                 if (activeId === data.id) {
                     return (
@@ -119,9 +137,11 @@ const Page = () => {
                                         type="button"
                                         className="btn btn-wide btn-neutral"
                                         disabled={!isSectionComplete}
-                                        onClick={() => handleNextClick()}
+                                        onClick={() => handleNextClick(data.id, index)}
                                     >
-                                        Next
+                                        {
+                                            index < sectionData.length - 1 ? "Next" : "Submit"
+                                        }
                                     </button>
                                 </div>
                             </form>

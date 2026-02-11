@@ -9,23 +9,33 @@ const useResumeStore = create<ResumeInfoProps>()(
             activeResumeId: null,
             resume_title: "untitled",
 
-            setResumeName: (title: string) => set(() => ({
-                resume_title: title,
-            })),
-
-            createResume: (title?: string) => set((state) => {
-                const id = uuidv4()
-                const newResume: ResumeInfo = {
-                    id,
-                    resume_title: title || "Untitled",
-                    resume_data: {},
+            setResumeName: (title: string) => set((state) => {
+                if (state.activeResumeId) {
+                    return {
+                        resumeInfo: state.resumeInfo.map((resume) =>
+                            resume.id === state.activeResumeId
+                                ? { ...resume, resume_title: title }
+                                : resume
+                        ),
+                        resume_title: title,
+                    };
                 }
-
                 return {
+                    resume_title: title,
+                };
+            }),
+
+            createResume: (title: string) => {
+                const id = uuidv4();
+                const newResume = { id, resume_title: title, resume_data: {} };
+
+                set((state) => ({
                     resumeInfo: [...state.resumeInfo, newResume],
                     activeResumeId: id
-                }
-            }),
+                }));
+
+                return id;
+            },
 
             setActiveResume: (id: string) => set({ activeResumeId: id }),
 
