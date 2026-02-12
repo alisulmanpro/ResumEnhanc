@@ -53,13 +53,15 @@ declare global {
     interface ResumeVisibleStoreProps {
         sections: ResumeVisibleSectionMeta[]
         sectionData: ResumeSectionMeta[]
-        resumeSectionFields: ResumeSectionFields[]
+        resumeSectionFields: Field[]
         completedSectionIds: string[]
         activeId: string
+        preActiveId: string | null
         hydrated: boolean
         setCompletedId: (id: string) => void
         setActiveId: (id: string) => void
         setHydrated: (hydrated: boolean) => void
+        setPreActiveId: (id: string | null) => void
     }
 
     interface ResumeInfo {

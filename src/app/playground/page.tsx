@@ -23,22 +23,26 @@ const Input: FC<InputProps> = ({ field, value, onChange }) => {
 
 const Page = () => {
     const { resumeSectionFields, sectionData, activeId, hydrated, setCompletedId, setActiveId } = useSectionsStore()
-    const { activeResumeId, resume_title, createResume, upsertSection } = useResumeStore()
+    const { resumeInfo, activeResumeId, resume_title, createResume, upsertSection } = useResumeStore()
     const [fields, setFields] = useState<Record<string, any>>({})
 
 
     useEffect(() => {
         if (!hydrated) return
 
+        const currentResume = resumeInfo.find(r => r.id === activeResumeId)
+
         const currentFields = resumeSectionFields
-            .filter((f) => f.sectionId === activeId)
+            .filter(f => f.sectionId === activeId)
             .reduce((acc, field) => {
-                acc[field.name] = ""
+                acc[field.name] =
+                    currentResume?.resume_data?.[sectionData.find(s => s.id === activeId)?.title ?? ""]?.[field.name] ?? ""
                 return acc
             }, {} as Record<string, any>)
 
         setFields(currentFields)
-    }, [activeId, hydrated, resumeSectionFields])
+    }, [activeId, resumeSectionFields, resumeInfo, activeResumeId])
+
 
     const handleFieldChange = (name: string, value: string) => {
         setFields((prev) => ({
@@ -123,14 +127,18 @@ const Page = () => {
                             <form className="grid grid-cols-2 gap-x-5 gap-y-2">
                                 {resumeSectionFields
                                     .filter((field) => field.sectionId === data.id)
-                                    .map((field) => (
-                                        <Input
-                                            key={field.id}
-                                            field={field}
-                                            value={fields[field.name] ?? ""}
-                                            onChange={handleFieldChange}
-                                        />
-                                    ))}
+                                    .map((field) => {
+                                        const currentResume = resumeInfo.find(r => r.id === activeResumeId)
+                                        const fieldValue = currentResume?.resume_data?.[data.title]?.[field.name] ?? ""
+                                        return (
+                                            <Input
+                                                key={field.id}
+                                                field={field}
+                                                value={fields[field.name] ?? ""}
+                                                onChange={handleFieldChange}
+                                            />
+                                        )
+                                    })}
 
                                 <div className="col-span-2 flex justify-end items-center mt-10">
                                     <button

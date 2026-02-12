@@ -1,7 +1,8 @@
 import resumeVisibleData from "./resume.visible"
 
+const sectionOrder = ['personal', 'contact', 'summary', 'education'] as const;
+
 export const ResumeSectionBuilder = (): ResumeVisibleSectionMeta[] => {
-    const sectionOrder = ['personal', 'contact', 'summary', 'education'] as const;
     const data: ResumeVisibleSectionMeta[] = []
     sectionOrder.map((key) => {
         const section = resumeVisibleData[key]
@@ -19,7 +20,6 @@ export const ResumeSectionBuilder = (): ResumeVisibleSectionMeta[] => {
 }
 
 export const ResumeData = (): ResumeSectionMeta[] => {
-    const sectionOrder = ['personal', 'contact', 'summary', 'education'] as const;
     const data: ResumeSectionMeta[] = []
     sectionOrder.map((key) => {
         const section = resumeVisibleData[key]
@@ -38,7 +38,6 @@ export const ResumeData = (): ResumeSectionMeta[] => {
 }
 
 export const ResumeSectionFields = (): Field[] => {
-    const sectionOrder = ['personal', 'contact', 'summary', 'education'] as const;
     const data: Field[] = []
     sectionOrder.map((key) => {
         const section = resumeVisibleData[key]

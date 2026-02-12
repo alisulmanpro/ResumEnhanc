@@ -12,6 +12,7 @@ export const useSectionsStore = create<ResumeVisibleStoreProps>()(
             resumeSectionFields: ResumeSectionFields(),
             completedSectionIds: [],
             activeId: ResumeData()[0].id,
+            preActiveId: null,
             hydrated: false,
 
             setActiveId: (id: string) =>
@@ -23,12 +24,16 @@ export const useSectionsStore = create<ResumeVisibleStoreProps>()(
                 set(() => ({
                     hydrated,
                 })),
-                
+
             setCompletedId: (id: string) => set((state) => ({
                 completedSectionIds: [
                     ...state.completedSectionIds,
                     id
                 ]
+            })),
+
+            setPreActiveId: (id) => set(() => ({
+                preActiveId: id
             }))
         }),
         {

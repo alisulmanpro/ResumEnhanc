@@ -18,6 +18,9 @@ const Modal = () => {
                 <div className="container">
                     <div className="card card-border border-base-300 bg-base-200 w-96 hover:scale-102 overflow-hidden">
                         <div className="relative card-body">
+                            <div>
+                                
+                            </div>
                             <h2 className="card-title">Card Title</h2>
                             <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
                             <div className="absolute inset-0 card-actions justify-center items-center">
@@ -33,7 +36,7 @@ const Modal = () => {
 
 const Page = () => {
 
-    const { sections, activeId, hydrated, completedSectionIds, setActiveId, setCompletedId } = useSectionsStore()
+    const { sections, activeId, hydrated, preActiveId, completedSectionIds, setActiveId, setPreActiveId } = useSectionsStore()
 
     const modelToggle = () => {
         const model = document.getElementById("model_toggle") as HTMLDialogElement
@@ -45,7 +48,14 @@ const Page = () => {
     }
 
     const handleActiveClick = (id: string): void => {
-        setActiveId(id)
+        if (completedSectionIds.includes(id)) {
+            setPreActiveId(activeId)
+            setActiveId(id)
+        } else {
+            setPreActiveId(null)
+            setActiveId(id)
+        }
+
     }
 
     if (!hydrated) {
@@ -56,11 +66,12 @@ const Page = () => {
 
     return (
         <ul className="menu menu-lg bg-base-100 rounded-box p-0 w-full gap-1 [&>*>*]:flex [&>*>*]:gap-5">
-            {sections?.map(section => {
+            {sections?.map((section, index) => {
                 const Icon = ResumeIcon[section.section_icon as ResumeIconKey]
 
                 const isCompleted = completedSectionIds.includes(section.id)
-                const isClickable = isCompleted || activeId === section.id
+                const activeIndex = sections.findIndex(s => s.id === preActiveId&&preActiveId)
+                const isClickable = isCompleted || index <= activeIndex
 
                 return (
                     <li
@@ -74,6 +85,7 @@ const Page = () => {
                         )}
                         onClick={() => {
                             if (!isClickable) return
+                            if (activeId === section.id) return
                             handleActiveClick(section.id)
                         }}
                     >
