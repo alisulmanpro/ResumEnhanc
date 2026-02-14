@@ -148,7 +148,7 @@ const resumeVisibleData: Record<string, ResumeSectionMeta> = {
         title: "Work Experience",
         description:
             "Details of your previous roles, responsibilities, and accomplishments in different companies.",
-        icon: "MdWork",
+        icon: "FaCogs",
         complete: false,
         visible: false,
         fields: [
@@ -198,7 +198,7 @@ const resumeVisibleData: Record<string, ResumeSectionMeta> = {
         title: "Skills",
         description:
             "Key professional skills and technical expertise relevant to your career.",
-        icon: "FaTools",
+        icon: "GiSoapExperiment",
         complete: false,
         visible: false,
         fields: [
@@ -218,7 +218,7 @@ const resumeVisibleData: Record<string, ResumeSectionMeta> = {
         title: "Projects",
         description:
             "Important projects demonstrating your abilities, contributions, and impact.",
-        icon: "FaProjectDiagram",
+        icon: "BsKanbanFill",
         complete: false,
         visible: false,
         fields: [
@@ -253,7 +253,7 @@ const resumeVisibleData: Record<string, ResumeSectionMeta> = {
         id: uuidv4(),
         title: "Certificates",
         description: "Professional certifications or courses you have completed.",
-        icon: "FaCertificate",
+        icon: "MdVerified",
         complete: false,
         visible: false,
         fields: [
@@ -287,7 +287,7 @@ const resumeVisibleData: Record<string, ResumeSectionMeta> = {
         id: uuidv4(),
         title: "Languages",
         description: "Languages you are proficient in and your level of expertise.",
-        icon: "FaLanguage",
+        icon: "LuLanguages",
         complete: false,
         visible: false,
         fields: [
@@ -315,7 +315,7 @@ const resumeVisibleData: Record<string, ResumeSectionMeta> = {
         title: "Custom Section",
         description:
             "Any additional information or personalized section you want to include in your resume.",
-        icon: "FaRegEdit",
+        icon: "MdBuild",
         complete: false,
         visible: false,
         fields: [

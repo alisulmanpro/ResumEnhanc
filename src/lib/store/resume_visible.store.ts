@@ -2,12 +2,13 @@
 
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { ResumeData, ResumeSectionBuilder, ResumeSectionFields } from '../data/resume.selector';
+import { ResumeAddMoreSectionBuilder, ResumeData, ResumeSectionBuilder, ResumeSectionFields } from '../data/resume.selector';
 
 export const useSectionsStore = create<ResumeVisibleStoreProps>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             sections: ResumeSectionBuilder(),
+            addMoreSections: ResumeAddMoreSectionBuilder(),
             sectionData: ResumeData(),
             resumeSectionFields: ResumeSectionFields(),
             completedSectionIds: [],
@@ -34,7 +35,17 @@ export const useSectionsStore = create<ResumeVisibleStoreProps>()(
 
             setPreActiveId: (id) => set(() => ({
                 preActiveId: id
-            }))
+            })),
+
+            setAddSection: (id: string) => {
+                const { addMoreSections, sections } = get();
+                const sectionToAdd = addMoreSections.find((s) => s.id === id);
+                if (!sectionToAdd) return;
+                set({
+                    sections: [...sections, sectionToAdd],
+                    addMoreSections: addMoreSections.filter((s) => s.id !== id)
+                });
+            },
         }),
         {
             name: 'resume-sections',
@@ -42,6 +53,7 @@ export const useSectionsStore = create<ResumeVisibleStoreProps>()(
             partialize: (state) => (
                 {
                     sections: state.sections,
+                    addMoreSections: state.addMoreSections,
                     sectionData: state.sectionData,
                     resumeSectionFields: state.resumeSectionFields,
                     activeId: state.activeId,

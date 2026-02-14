@@ -57,3 +57,23 @@ export const ResumeSectionFields = (): Field[] => {
 
     return data
 }
+
+const section_Order = ['experience', 'skills', 'projects', 'certificates', 'languages', 'custom'] as const;
+
+export const ResumeAddMoreSectionBuilder = (): ResumeVisibleSectionMeta[] => {
+    const data: ResumeVisibleSectionMeta[] = []
+    section_Order.map((key) => {
+        const section = resumeVisibleData[key]
+        const sectionData: ResumeVisibleSectionMeta = {
+            id: section.id,
+            section_title: section.title,
+            section_description: section.description,
+            section_icon: section.icon,
+            is_complete: section.complete,
+            visible: section.visible,
+        }
+        data.push(sectionData)
+    })
+
+    return data
+}

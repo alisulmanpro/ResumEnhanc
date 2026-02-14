@@ -20,6 +20,7 @@ declare global {
         | "LuLanguages"
         | "MdBuild"
         | "MdVerified"
+        | "GiSoapExperiment"
 
     interface Field {
         sectionId?: string
@@ -45,6 +46,7 @@ declare global {
     interface ResumeVisibleSectionMeta {
         id: string
         section_title: string
+        section_description?: string
         section_icon: string
         is_complete: boolean
         visible: boolean
@@ -52,6 +54,7 @@ declare global {
 
     interface ResumeVisibleStoreProps {
         sections: ResumeVisibleSectionMeta[]
+        addMoreSections: ResumeVisibleSectionMeta[]
         sectionData: ResumeSectionMeta[]
         resumeSectionFields: Field[]
         completedSectionIds: string[]
@@ -62,6 +65,7 @@ declare global {
         setActiveId: (id: string) => void
         setHydrated: (hydrated: boolean) => void
         setPreActiveId: (id: string | null) => void
+        setAddSection: (id: string) => void
     }
 
     interface ResumeInfo {

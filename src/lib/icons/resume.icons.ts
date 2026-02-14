@@ -3,6 +3,7 @@ import { FaGraduationCap } from "react-icons/fa6"
 import { BsKanbanFill } from "react-icons/bs"
 import { LuLanguages } from "react-icons/lu"
 import type { IconType } from "react-icons"
+import { GiSoapExperiment } from "react-icons/gi";
 import { FaCogs } from "react-icons/fa";
 import {
     MdPermContactCalendar,
@@ -21,6 +22,7 @@ const ResumeIcon: Record<ResumeIconKey, IconType> = {
     LuLanguages,
     MdBuild,
     MdVerified,
+    GiSoapExperiment,
 }
 
 export default ResumeIcon
