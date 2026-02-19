@@ -1,17 +1,22 @@
 // src/app/page.tsx
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
+import { RiGeminiFill } from "react-icons/ri";
+import { FaStar } from "react-icons/fa";
+import { GiCheckMark } from "react-icons/gi";
+import { FaCircle } from "react-icons/fa";
+import { FaStarHalf } from "react-icons/fa";
 import {
   FaPlay,
-  FaBars,
   FaChevronDown,
   FaCheck,
-  FaGithub
 } from 'react-icons/fa';
 import Footer from '@/components/ui/footer.main';
 import Navbar from '@/components/ui/navbar.main';
+import Link from 'next/link';
+import Avatar from '@/components/ui/avatar.main';
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -28,123 +33,66 @@ export default function Home() {
       {/* ========== NAVBAR ========== */}
       <Navbar />
 
-      {/* MOBILE MENU */}
-      {menuOpen && (
-        <div className="fixed inset-0 bg-base-100 z-50 pt-20 px-6 lg:hidden">
-          <ul className="menu menu-vertical text-2xl font-medium gap-6">
-            <li><a onClick={() => scrollToSection('features')}>Features</a></li>
-            <li><a onClick={() => scrollToSection('how')}>How it Works</a></li>
-            <li><a onClick={() => scrollToSection('templates')}>Templates</a></li>
-            <li><a onClick={() => scrollToSection('pricing')}>Pricing</a></li>
-            <li><a href="#" className="mt-8">Log in</a></li>
-            <li>
-              <button
-                onClick={() => scrollToSection('get-started')}
-                className="btn btn-primary btn-block text-lg"
-              >
-                Get Started Free
-              </button>
-            </li>
-          </ul>
-        </div>
-      )}
-
       {/* HERO */}
       <section className="hero min-h-screen hero-bg relative overflow-hidden" id="hero">
         <div className="hero-content max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 bg-white rounded-3xl px-5 py-2 shadow text-sm font-medium border border-base-300">
-              <span className="text-emerald-500">✦</span>
+              <span className="text-neutral"><RiGeminiFill /></span>
               <span>New: AI ATS Score Checker</span>
             </div>
 
-            <h1 className="text-6xl lg:text-7xl font-bold tracking-tighter leading-none">
-              Build <span className="text-primary">ATS-proof</span><br />resumes in minutes
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tighter leading-none">
+              Build <span className="text-primary">ATS-Proof</span><br />resumes in seconds
             </h1>
 
-            <p className="text-2xl text-base-content/70 max-w-lg">
+            <p className="text-lg text-base-content/70 max-w-lg">
               AI-powered resume builder & enhancer. Real-time preview, keyword optimization,
               and stunning templates that get you hired.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button
-                onClick={() => scrollToSection('get-started')}
-                className="btn btn-primary btn-lg rounded-2xl text-xl px-10 shadow-xl hover:scale-105 transition-transform"
-              >
-                Start Building Free
-              </button>
+              <Link href="/" className="btn btn-neutral w-full md:btn-wide">Get Started | Free</Link>
               <button
                 onClick={() => alert('Demo video would play here (YouTube embed in production)')}
-                className="btn btn-outline btn-lg rounded-2xl text-xl px-8 flex items-center gap-3"
+                className="btn w-full md:btn-wide btn-neutral btn-outline"
               >
                 <FaPlay /> Watch 1-min demo
               </button>
             </div>
 
             <div className="flex items-center gap-8 text-sm">
-              <div className="flex -space-x-4">
-                <div className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
-                  <Image src="/image-1" alt="" width={32} height={32} className="object-cover" />
-                </div>
-                <div className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
-                  <Image src="/image-2" alt="" width={32} height={32} className="object-cover" />
-                </div>
-                <div className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
-                  <Image src="/image-3" alt="" width={32} height={32} className="object-cover" />
-                </div>
-              </div>
+              <Avatar />
               <div>
-                <div className="font-semibold">Trusted by 12,450+ job seekers</div>
-                <div className="flex text-amber-400">★★★★★ <span className="text-base-content/60 ml-2">4.98 avg</span></div>
+                <div className="font-semibold">Trusted by job seekers</div>
+                <div className="flex text-amber-400">
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStarHalf />
+                  <span className="text-base-content/60 ml-2">4.98 avg</span>
+                  </div>
               </div>
-            </div>
-
-            {/* Trust logos */}
-            <div className="flex gap-8 opacity-75">
-              <div className="text-2xl font-bold text-base-content/40">Google</div>
-              <div className="text-2xl font-bold text-base-content/40">Meta</div>
-              <div className="text-2xl font-bold text-base-content/40">Tesla</div>
-              <div className="text-2xl font-bold text-base-content/40">Amazon</div>
             </div>
           </div>
 
           {/* Resume Mock */}
           <div className="relative hidden lg:block">
-            <div className="resume-mock bg-white rounded-3xl p-6 shadow-2xl max-w-[380px] mx-auto border border-base-300">
-              <div className="bg-zinc-900 text-white rounded-2xl p-8 text-center">
-                <div className="w-20 h-20 mx-auto bg-white/20 backdrop-blur rounded-full mb-4 flex items-center justify-center text-4xl">👨‍💼</div>
-                <h3 className="font-semibold text-2xl">Alex Rivera</h3>
-                <p className="text-sm opacity-75">Senior Product Designer • Open to work</p>
-              </div>
-
-              <div className="mt-8 space-y-6 text-sm">
-                <div>
-                  <div className="font-medium text-primary mb-1">EXPERIENCE</div>
-                  <div className="flex justify-between text-xs">
-                    <div><strong>Product Designer</strong> @ Stripe</div>
-                    <div className="text-base-content/60">2023 – Present</div>
-                  </div>
-                </div>
-                <div className="h-px bg-base-300" />
-                <div className="grid grid-cols-2 gap-4 text-xs">
-                  <div className="bg-base-100 p-4 rounded-2xl">+45% Interview rate after AI enhancement</div>
-                  <div className="bg-emerald-50 text-emerald-600 p-4 rounded-2xl font-medium">ATS Score: 98%</div>
-                </div>
-              </div>
-            </div>
+            <Image src="/resume-1.jpg" width={1000} height={1000} className="w-auto h-130" alt="resume image" />
 
             {/* Floating badges */}
             <div className="absolute -top-6 -left-6 bg-white shadow-xl rounded-3xl px-6 py-3 flex items-center gap-3 text-sm font-medium">
-              <span className="text-emerald-500">✓</span>
+              <span className="text-primary"><GiCheckMark /></span>
               AI Enhanced
             </div>
             <div className="absolute -bottom-8 right-12 bg-white shadow-xl rounded-3xl px-5 py-3 text-xs flex items-center gap-2 border border-emerald-200">
-              <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse" />
+              <FaCircle className='size-4 text-primary animate-pulse' />
               Real-time Preview
             </div>
           </div>
         </div>
+
 
         <div className="absolute bottom-10 left-1/2 hidden lg:flex flex-col items-center text-xs opacity-60">
           <div className="mb-2">Scroll to explore</div>
