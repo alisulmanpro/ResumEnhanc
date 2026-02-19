@@ -1,18 +1,11 @@
-// src/app/page.tsx
 'use client';
 
 import { useState } from 'react';
 import Image from 'next/image';
 import { RiGeminiFill } from "react-icons/ri";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaStarHalf, FaPlay, FaChevronDown, FaCheck } from 'react-icons/fa';
 import { GiCheckMark } from "react-icons/gi";
 import { FaCircle } from "react-icons/fa";
-import { FaStarHalf } from "react-icons/fa";
-import {
-  FaPlay,
-  FaChevronDown,
-  FaCheck,
-} from 'react-icons/fa';
 import Footer from '@/components/ui/footer.main';
 import Navbar from '@/components/ui/navbar.main';
 import Link from 'next/link';
@@ -20,6 +13,7 @@ import Avatar from '@/components/ui/avatar.main';
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -33,8 +27,8 @@ export default function Home() {
       {/* ========== NAVBAR ========== */}
       <Navbar />
 
-      {/* HERO */}
-      <section className="hero min-h-screen hero-bg relative overflow-hidden" id="hero">
+      {/* HERO - Home */}
+      <section className="hero min-h-screen hero-bg relative overflow-hidden" id="home">
         <div className="hero-content max-w-7xl mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             <div className="inline-flex items-center gap-2 bg-white rounded-3xl px-5 py-2 shadow text-sm font-medium border border-base-300">
@@ -66,22 +60,16 @@ export default function Home() {
               <div>
                 <div className="font-semibold">Trusted by job seekers</div>
                 <div className="flex text-amber-400">
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStarHalf />
+                  <FaStar /><FaStar /><FaStar /><FaStar /><FaStarHalf />
                   <span className="text-base-content/60 ml-2">4.98 avg</span>
-                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Resume Mock */}
           <div className="relative hidden lg:block">
             <Image src="/resume-1.jpg" width={1000} height={1000} className="w-auto h-130" alt="resume image" />
 
-            {/* Floating badges */}
             <div className="absolute -top-6 -left-6 bg-white shadow-xl rounded-3xl px-6 py-3 flex items-center gap-3 text-sm font-medium">
               <span className="text-primary"><GiCheckMark /></span>
               AI Enhanced
@@ -93,10 +81,56 @@ export default function Home() {
           </div>
         </div>
 
-
         <div className="absolute bottom-10 left-1/2 hidden lg:flex flex-col items-center text-xs opacity-60">
           <div className="mb-2">Scroll to explore</div>
           <FaChevronDown className="animate-bounce" />
+        </div>
+      </section>
+
+      {/* ========== ABOUT ========== */}
+      <section id="about" className="py-24 bg-base-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="badge badge-primary badge-lg mb-4">OUR MISSION</div>
+            <h2 className="text-5xl font-bold tracking-tighter">Leveling the playing field for every job seeker</h2>
+            <p className="mt-6 max-w-2xl mx-auto text-lg text-base-content/70">
+              Traditional resumes favor those who can afford coaches. We use AI to give everyone the same unfair advantage.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-12">
+              <div className="flex items-start gap-6">
+                <div className="w-16 h-16 flex-shrink-0 bg-primary text-white rounded-2xl flex items-center justify-center text-4xl">👥</div>
+                <div>
+                  <h3 className="font-semibold text-2xl mb-2">Built by experts</h3>
+                  <p className="text-base-content/70">Ex-recruiters from Google, Microsoft &amp; top startups + AI engineers who hated boring resumes.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-6">
+                <div className="w-16 h-16 flex-shrink-0 bg-emerald-500 text-white rounded-2xl flex items-center justify-center text-4xl">📊</div>
+                <div>
+                  <h3 className="font-semibold text-2xl mb-2">Data-driven AI</h3>
+                  <p className="text-base-content/70">Trained on 100,000+ successful resumes and real ATS systems. Continuously improved with real user results.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+              <Image
+                src="https://picsum.photos/id/1015/800/600"
+                alt="ResumEnhanc team"
+                width={800}
+                height={600}
+                className="w-full h-auto object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-8 left-8 text-white">
+                <div className="text-sm opacity-90">“Finally, a tool that actually gets it”</div>
+                <div className="text-xs mt-1 opacity-75">- Sarah Chen, Product Manager @ Vercel</div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -193,9 +227,9 @@ export default function Home() {
                   alt="Template"
                   width={300}
                   height={420}
-                  className="w-full aspect-[9/13] object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full aspect-9/13 object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6">
                   <div className="text-white font-medium">
                     {["Modern Classic", "Creative Bold", "Tech Minimal", "Executive"][i]}
                   </div>
@@ -285,8 +319,101 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ========== CONTACT US ========== */}
+      <section id="contact" className="py-24 bg-base-200">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="badge badge-primary badge-lg mb-4">GET IN TOUCH</div>
+            <h2 className="text-5xl font-bold tracking-tighter">Questions? Ideas? Let’s chat</h2>
+            <p className="mt-4 text-xl text-base-content/70 max-w-md mx-auto">
+              Our team replies within 24 hours. No sales pitch — just real help.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-12 gap-12">
+            {/* Form */}
+            <div className="md:col-span-7">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setIsSubmitting(true);
+                  setTimeout(() => {
+                    alert("✅ Message sent! We'll reply soon.");
+                    setIsSubmitting(false);
+                    e.currentTarget.reset();
+                  }, 1500);
+                }}
+                className="card bg-base-100 shadow-xl p-10 space-y-8"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="label"><span className="label-text font-medium">Full Name</span></label>
+                    <input type="text" placeholder="Alex Rivera" className="input input-bordered w-full" required />
+                  </div>
+                  <div>
+                    <label className="label"><span className="label-text font-medium">Email Address</span></label>
+                    <input type="email" placeholder="you@email.com" className="input input-bordered w-full" required />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="label"><span className="label-text font-medium">Subject</span></label>
+                  <input type="text" placeholder="Feedback on ATS score" className="input input-bordered w-full" />
+                </div>
+
+                <div>
+                  <label className="label"><span className="label-text font-medium">How can we help?</span></label>
+                  <textarea
+                    placeholder="I need help tailoring my resume for a Software Engineer role at..."
+                    className="textarea textarea-bordered w-full h-40"
+                    required
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn btn-primary btn-lg w-full"
+                >
+                  {isSubmitting ? <span className="loading loading-spinner"></span> : 'Send Message'}
+                </button>
+              </form>
+            </div>
+
+            {/* Contact Info */}
+            <div className="md:col-span-5 space-y-8 pt-8 md:pt-0">
+              <div className="bg-white rounded-3xl p-8 shadow">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-primary/10 text-primary rounded-2xl flex items-center justify-center text-3xl">✉️</div>
+                  <div>
+                    <div className="font-semibold">Email</div>
+                    <a href="mailto:support@resum-enhanc.com" className="link link-primary">support@resum-enhanc.com</a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-emerald-500/10 text-emerald-500 rounded-2xl flex items-center justify-center text-3xl">📞</div>
+                  <div>
+                    <div className="font-semibold">WhatsApp</div>
+                    <a href="https://wa.me/923001234567" className="link link-primary">+92 300 1234567</a>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="text-sm uppercase tracking-widest font-medium text-base-content/60 mb-3">Follow us</div>
+                <div className="flex gap-4">
+                  <a href="#" className="btn btn-ghost btn-circle text-2xl">𝕏</a>
+                  <a href="#" className="btn btn-ghost btn-circle text-2xl">in</a>
+                  <a href="#" className="btn btn-ghost btn-circle text-2xl">📸</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FINAL CTA */}
-      <section id="get-started" className="py-28 bg-gradient-to-br from-primary to-violet-600 text-white">
+      <section id="get-started" className="py-28 bg-linear-to-br from-primary to-violet-600 text-white">
         <div className="max-w-3xl mx-auto text-center px-6">
           <h2 className="text-6xl font-bold tracking-tighter leading-none">Ready to land your next role?</h2>
           <p className="text-2xl mt-8 opacity-90">Join thousands who already boosted their interview rate with ResumEnhanc</p>
