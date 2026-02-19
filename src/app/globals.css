@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+*{
+  scroll-behavior: smooth;
+}
+
 
 @plugin "daisyui/theme" {
   name: "corporate";
